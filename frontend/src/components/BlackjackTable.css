@@ -1,0 +1,122 @@
+.blackjack-table {
+  flex: 1;
+  width: 100%;
+  min-height: 400px;
+}
+
+.table-felt {
+  background-color: #277714;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.dealer-area, .player-area {
+  margin-bottom: 20px;
+}
+
+.dealer-area h2, .player-area h2 {
+  color: #ffffff;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.hand {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.card-container {
+  transition: transform 0.3s;
+}
+
+.card-container:hover {
+  transform: translateY(-5px);
+}
+
+.card {
+  width: 80px;
+  height: 120px;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.card.red {
+  color: #D40000;
+}
+
+.card.black {
+  color: #000000;
+}
+
+.card-value-top {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: left;
+}
+
+.card-suit {
+  font-size: 2rem;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-value-bottom {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: right;
+  transform: rotate(180deg);
+}
+
+.card.face-down {
+  background-color: #277714;
+}
+
+.card-back {
+  width: 100%;
+  height: 100%;
+  background-color: #1e2124;
+  border-radius: 3px;
+  background-image: repeating-linear-gradient(
+    45deg,
+    #1e2124,
+    #1e2124 5px,
+    #2c3e50 5px,
+    #2c3e50 10px
+  );
+}
+
+.game-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 15px 30px;
+  border-radius: 8px;
+  text-align: center;
+  z-index: 10;
+}
+
+.game-message p {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+} 

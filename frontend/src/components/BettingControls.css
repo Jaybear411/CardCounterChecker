@@ -1,0 +1,70 @@
+.betting-controls {
+  margin-bottom: 20px;
+}
+
+.betting-controls h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #ffd700;
+}
+
+.bet-amount-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  background-color: #2c3e50;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.bet-amount-controls span {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0 10px;
+  color: #ffd700;
+}
+
+.bet-button {
+  width: 40px;
+  height: 40px;
+  background-color: #3498db;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bet-button:hover {
+  background-color: #2980b9;
+}
+
+.bet-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chip {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: all 0.3s;
+  background-color: #3498db;
+}
+
+.chip.selected {
+  transform: scale(1.1);
+  border: 2px solid #ffd700;
+  background-color: #2980b9;
+}
+
+.chip:hover:not(:disabled) {
+  transform: scale(1.1);
+} 

@@ -1,0 +1,117 @@
+.counter-detection {
+  padding: 20px;
+  background-color: #1e2124;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.counter-detection h2 {
+  color: #4CAF50;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.detection-info {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .detection-info {
+    flex-direction: row;
+  }
+}
+
+.detection-stats {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px;
+  background-color: #2c3e50;
+  border-radius: 8px;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed #4a6b8a;
+  padding-bottom: 8px;
+}
+
+.stat-label {
+  font-weight: bold;
+  color: #bdc3c7;
+}
+
+.stat-value {
+  font-family: monospace;
+  font-size: 1.2rem;
+  color: #ecf0f1;
+}
+
+.status-indicator {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-weight: bold;
+  text-align: center;
+  min-width: 100px;
+}
+
+.status-indicator.low {
+  background-color: #2ecc71;
+  color: black;
+}
+
+.status-indicator.medium {
+  background-color: #f39c12;
+  color: black;
+}
+
+.status-indicator.high {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.status-indicator.neutral {
+  background-color: #95a5a6;
+  color: black;
+}
+
+.detection-explanation {
+  flex: 1;
+  padding: 15px;
+  background-color: #2c3e50;
+  border-radius: 8px;
+}
+
+.detection-explanation h3 {
+  color: #3498db;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.detection-explanation p {
+  color: #ecf0f1;
+  line-height: 1.6;
+}
+
+.detection-chart {
+  background-color: #2c3e50;
+  padding: 20px;
+  border-radius: 8px;
+  height: 300px;
+}
+
+.no-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #bdc3c7;
+  font-style: italic;
+} 
