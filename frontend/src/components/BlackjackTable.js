@@ -12,14 +12,14 @@ const BlackjackTable = ({ playerHand, dealerHand, gameOver, message }) => {
     // For face-down card
     if (value === '?') {
       return (
-        <div className="card face-down">
+        <div className="card face-down new-card">
           <div className="card-back"></div>
         </div>
       );
     }
     
     return (
-      <div className={`card ${cardColor}`}>
+      <div className={`card ${cardColor} new-card`}>
         <div className="card-value-top">{value}</div>
         <div className="card-suit">{suit}</div>
         <div className="card-value-bottom">{value}</div>

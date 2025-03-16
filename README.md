@@ -1,6 +1,6 @@
 # Card Counter Checker
 
-A system that uses Singular Value Decomposition (SVD) and linear algebra to detect card counting behavior in Blackjack players.
+A system that uses advanced linear algebra techniques including Cholesky decomposition, correlation matrices, Kalman filtering, and Markov chains to detect card counting behavior in Blackjack players.
 
 ## Overview
 
@@ -9,19 +9,24 @@ Card counting in Blackjack gives players an advantage by tracking the ratio of h
 This system:
 1. Collects a dataset of Blackjack hands
 2. Transforms the data into a numerical matrix using features like dealer upcard, player hand value, action taken, bet size, and running count
-3. Applies Singular Value Decomposition (SVD) to reduce dimensionality and extract latent behavioral patterns
-4. Uses cosine similarity to compare each hand's behavior to those of known card counters
-5. Flags players with behavior similar to card counters
+3. Applies multiple dimensionality reduction techniques (SVD and PCA) to extract latent behavioral patterns
+4. Uses correlation matrices and Cholesky decomposition to analyze relationships between variables
+5. Implements Kalman filtering for real-time tracking of player behavior
+6. Uses Markov chains to predict future betting patterns
+7. Calculates Mahalanobis distance to detect outliers in player behavior
+8. Flags players with behavior similar to card counters
 
 ## Features
 
 - **Data Simulation:** Creates synthetic datasets where each row represents a Blackjack hand
 - **Normalization:** Scales features using StandardScaler for uniformity
-- **SVD Application:** Reduces the dataset to principal components capturing key variations in behavior
+- **Advanced Dimensionality Reduction:** Combines SVD and PCA to capture key variations in behavior
+- **Correlation Analysis:** Uses correlation matrices to identify relationships between betting patterns and card counting indicators
+- **Cholesky Decomposition:** Decomposes the correlation matrix for more efficient calculations and simulation
+- **Kalman Filtering:** Provides real-time tracking and prediction of player behavior
+- **Markov Chain Modeling:** Predicts future betting patterns based on current behavior
+- **Mahalanobis Distance:** Detects outliers in player behavior accounting for feature correlations
 - **Cosine Similarity:** Compares reduced representations to known card counter patterns
-- **Anomaly Detection:** Uses Isolation Forest to identify outlier betting behavior
-- **Pattern Recognition:** Analyzes betting patterns relative to the running count
-- **Kelly Criterion Analysis:** Checks how closely betting behavior follows optimal strategies
 - **Multi-method Detection:** Combines multiple approaches for more robust detection
 - **Visualization:** Creates intuitive plots to interpret detection results
 - **Web Application:** Includes a web-based frontend to play Blackjack and see real-time card counting detection
@@ -57,9 +62,10 @@ This repository contains several modules that work together or independently:
 5. **Web Application (`app.py` and `frontend/`)**: A Flask + React web app that:
    - Allows users to play Blackjack in the browser
    - Tracks player decisions and bet sizes
-   - Analyzes behavior in real-time for card counting patterns
+   - Analyzes behavior in real-time using advanced linear algebra techniques
    - Displays a graph showing how suspicious the play pattern appears
    - Provides a visual indicator of detection risk level
+   - Includes correlation analysis and eigenvalue decomposition for deeper insights
 
 ## Requirements
 
@@ -70,6 +76,8 @@ This repository contains several modules that work together or independently:
 - matplotlib
 - seaborn
 - scipy
+- statsmodels
+- pykalman
 - Flask (for web app)
 - React (for frontend)
 
@@ -97,7 +105,7 @@ Or manually:
 
 ```bash
 # Install backend dependencies
-pip install flask flask-cors numpy pandas scikit-learn
+pip install flask flask-cors numpy pandas scikit-learn scipy statsmodels pykalman
 
 # Start the Flask backend
 python app.py
@@ -157,10 +165,44 @@ If you see "Loading game..." for an extended period:
 ## How It Works
 
 1. **Data Representation:** Each Blackjack hand is represented by the dealer's upcard, player's hand value, action taken, bet size, and running count.
-2. **Dimensionality Reduction:** SVD transforms this high-dimensional data into a lower-dimensional space that captures the most important patterns.
-3. **Similarity Analysis:** The system compares player behavior to known card counter patterns using cosine similarity.
-4. **Pattern Analysis:** Betting patterns are analyzed for correlation with the running count.
-5. **Combined Decision:** Multiple detection methods are used together to arrive at a final verdict.
+2. **Dimensionality Reduction:** SVD and PCA transform this high-dimensional data into a lower-dimensional space that captures the most important patterns.
+3. **Correlation Analysis:** The system calculates correlation matrices to identify relationships between variables.
+4. **Cholesky Decomposition:** The correlation matrix is decomposed using Cholesky factorization for more efficient calculations.
+5. **Kalman Filtering:** Real-time tracking of player behavior with noise reduction.
+6. **Markov Chain Modeling:** Prediction of future betting patterns based on current behavior.
+7. **Similarity Analysis:** The system compares player behavior to known card counter patterns using cosine similarity.
+8. **Mahalanobis Distance:** Detects outliers in player behavior accounting for feature correlations.
+9. **Combined Decision:** Multiple detection methods are used together to arrive at a final verdict.
+
+## Advanced Linear Algebra Techniques
+
+### Correlation Matrices and Cholesky Decomposition
+The system calculates correlation matrices between different player behaviors (bet size, running count, actions) and uses Cholesky decomposition to factorize these matrices. This allows for:
+- Identifying relationships between betting patterns and card counting indicators
+- More efficient calculations in high-dimensional spaces
+- Generating correlated random variables for simulation
+- Solving linear systems efficiently
+
+### Kalman Filtering
+Kalman filtering is used for real-time tracking of player behavior with noise reduction:
+- Predicts future behavior based on past observations
+- Reduces noise in measurements
+- Updates predictions based on new observations
+- Provides a more accurate estimate of player behavior over time
+
+### Markov Chain Modeling
+The system uses Markov chains to model and predict betting patterns:
+- Predicts future bet sizes based on current betting behavior
+- Models the transition probabilities between different bet sizes
+- Identifies suspicious patterns in betting behavior
+- Compares actual betting behavior to predicted behavior
+
+### Mahalanobis Distance
+Mahalanobis distance is used to detect outliers in player behavior:
+- Accounts for correlations between features
+- More accurate than Euclidean distance for correlated data
+- Identifies unusual combinations of features
+- Provides a statistical measure of how unusual a player's behavior is
 
 ## Web Application Features
 
@@ -169,10 +211,8 @@ If you see "Loading game..." for an extended period:
 - **Real-time Detection:** See how likely your play pattern matches known card counters
 - **Visualization:** Graph showing your detection score over time
 - **Risk Level Indicator:** Visual feedback on how suspicious your play appears
-
-## Customization
-
-- Modify the synthetic data generation to match your real-world dataset
-- Tune the various thresholds for each detection method
-- Adjust the number of SVD components based on your dataset's complexity
-- Change the visualization settings to highlight specific aspects of the data 
+- **Correlation Analysis:** View the correlation matrix between different player behaviors
+- **Eigenvalue Decomposition:** See the principal components of player behavior
+- **Cholesky Decomposition:** View the Cholesky factors of the correlation matrix
+- **Kalman Filter State:** Track the estimated state of player behavior over time
+- **Markov Chain Predictions:** See predictions of future betting patterns 

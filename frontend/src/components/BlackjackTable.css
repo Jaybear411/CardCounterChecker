@@ -1,61 +1,134 @@
 .blackjack-table {
   flex: 1;
   width: 100%;
-  min-height: 400px;
+  min-height: 450px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .table-felt {
-  background-color: #277714;
+  background: linear-gradient(135deg, #2c3e50, #1a1a2e);
   border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), inset 0 0 60px rgba(230, 57, 70, 0.2);
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+  border: 2px solid #e63946;
+  overflow: hidden;
+}
+
+.table-felt::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23e63946' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M0 0h40v40H0V0zm40 40h40v40H40V40zm0-40h2l-2 2V0zm0 4l4-4h2l-6 6V4zm0 4l8-8h2L40 12V8zm0 4L52 0h2L40 16v-4zm0 4L56 0h2L40 20v-4zm0 4L60 0h2L40 24v-4zm0 4L64 0h2L40 28v-4zm0 4L68 0h2L40 32v-4zm0 4L72 0h2L40 36v-4zm0 4L76 0h2L40 40v-4zm4 0l76-76h2L44 40h-4zm4 0l76-76h2L48 40h-4zm4 0l76-76h2L52 40h-4zm4 0l76-76h2L56 40h-4zm4 0l76-76h2L60 40h-4zm4 0l76-76h2L64 40h-4zm4 0l76-76h2L68 40h-4zm4 0l76-76h2L72 40h-4zm4 0l76-76h2L76 40h-4zm4 0l76-76h2L80 40h-4zm4 0l76-76h2L84 40h-4zm4 0l76-76h2L88 40h-4zm4 0l76-76h2L92 40h-4zm4 0l76-76h2L96 40h-4zm4 0l76-76h2L100 40h-4z'/%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.3;
 }
 
 .dealer-area, .player-area {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 5;
 }
 
 .dealer-area h2, .player-area h2 {
   color: #ffffff;
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  text-shadow: 0 0 10px rgba(230, 57, 70, 0.8);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.dealer-area h2 span, .player-area h2 span {
+  color: #e63946;
+  margin-left: 5px;
+  font-weight: 700;
+  animation: pulseText 1.5s infinite alternate;
+}
+
+@keyframes pulseText {
+  from { text-shadow: 0 0 5px rgba(230, 57, 70, 0.5); }
+  to { text-shadow: 0 0 15px rgba(230, 57, 70, 0.8); }
 }
 
 .hand {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 15px;
+  min-height: 135px;
 }
 
 .card-container {
-  transition: transform 0.3s;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  animation: dealCard 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards;
+}
+
+.dealer-hand .card-container:nth-child(1) { animation-delay: 0.1s; }
+.dealer-hand .card-container:nth-child(2) { animation-delay: 0.2s; }
+.player-hand .card-container:nth-child(1) { animation-delay: 0.3s; }
+.player-hand .card-container:nth-child(2) { animation-delay: 0.4s; }
+.player-hand .card-container:nth-child(3) { animation-delay: 0.5s; }
+.player-hand .card-container:nth-child(4) { animation-delay: 0.6s; }
+.player-hand .card-container:nth-child(5) { animation-delay: 0.7s; }
+
+@keyframes dealCard {
+  from {
+    opacity: 0;
+    transform: translateY(-50px) rotate(-10deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
 }
 
 .card-container:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px) rotate(2deg);
+  z-index: 10;
 }
 
 .card {
-  width: 80px;
-  height: 120px;
+  width: 90px;
+  height: 130px;
   background-color: white;
-  border-radius: 5px;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  padding: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
   position: relative;
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+  pointer-events: none;
 }
 
 .card.red {
-  color: #D40000;
+  color: #e63946;
 }
 
 .card.black {
@@ -63,43 +136,59 @@
 }
 
 .card-value-top {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: bold;
   text-align: left;
+  line-height: 1;
 }
 
 .card-suit {
-  font-size: 2rem;
+  font-size: 2.5rem;
   text-align: center;
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
 }
 
 .card-value-bottom {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: bold;
   text-align: right;
   transform: rotate(180deg);
+  line-height: 1;
 }
 
 .card.face-down {
-  background-color: #277714;
+  background-color: #1a1a2e;
+  transform: rotateY(0deg);
 }
 
 .card-back {
   width: 100%;
   height: 100%;
-  background-color: #1e2124;
-  border-radius: 3px;
-  background-image: repeating-linear-gradient(
+  background-color: #1a1a2e;
+  border-radius: 5px;
+  background-image: linear-gradient(
     45deg,
-    #1e2124,
-    #1e2124 5px,
-    #2c3e50 5px,
-    #2c3e50 10px
+    #1a1a2e 25%,
+    #e63946 25%,
+    #e63946 50%,
+    #1a1a2e 50%,
+    #1a1a2e 75%,
+    #e63946 75%,
+    #e63946
   );
+  background-size: 10px 10px;
+  border: 5px solid #333;
+  box-sizing: border-box;
+  animation: movePattern 8s linear infinite;
+}
+
+@keyframes movePattern {
+  from { background-position: 0 0; }
+  to { background-position: 100px 100px; }
 }
 
 .game-message {
@@ -107,16 +196,32 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 15px 30px;
-  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.85);
+  padding: 20px 40px;
+  border-radius: 12px;
   text-align: center;
-  z-index: 10;
+  z-index: 20;
+  border: 2px solid #e63946;
+  box-shadow: 0 0 30px rgba(230, 57, 70, 0.5);
+  animation: messageAppear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  backdrop-filter: blur(5px);
+}
+
+@keyframes messageAppear {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 .game-message p {
   color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.8rem;
+  font-weight: 600;
   margin: 0;
+  text-shadow: 0 0 10px rgba(230, 57, 70, 0.8);
 } 
